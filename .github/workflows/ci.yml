@@ -12,6 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - uses: devblackops/github-action-psscriptanalyzer@v1.2.1
     - name: Install Pester
       shell: pwsh
       run: Install-Module Pester -Force
