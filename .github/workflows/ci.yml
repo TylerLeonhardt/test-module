@@ -12,5 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a script
-      run: pwsh -c "$PSVersionTable"
+    - name: Install Pester
+      run: pwsh -c { Install-Module Pester }
+    - name: Install Pester
+      run: pwsh -c { Invoke-Pester test }
