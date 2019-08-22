@@ -13,6 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Pester
-      run: pwsh -c { Install-Module Pester }
+      shell: pwsh
+      run: Install-Module Pester
     - name: Install Pester
-      run: pwsh -c { Invoke-Pester test }
+      shell: pwsh
+      run: Invoke-Pester test
