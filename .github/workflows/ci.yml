@@ -26,3 +26,7 @@ jobs:
     - name: Install Pester
       shell: pwsh
       run: Invoke-Pester test -EnableExit
+    - uses: actions/upload-artifact@master
+      with:
+        name: test-module
+        path: .
