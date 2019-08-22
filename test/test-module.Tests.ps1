@@ -6,5 +6,8 @@ Describe 'Module Manifest Tests' {
         Test-ModuleManifest -Path $ModuleManifestPath | Should Not BeNullOrEmpty
         $? | Should Be $true
     }
+    It 'Fails' {
+        $true | Should -Be $false
+    }
 }
 
