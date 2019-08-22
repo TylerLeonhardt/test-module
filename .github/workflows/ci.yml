@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run a script
-      run: pwsh -c '$PSVersionTable'
+      run: pwsh -c "$PSVersionTable"
