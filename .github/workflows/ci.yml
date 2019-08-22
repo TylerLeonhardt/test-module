@@ -17,4 +17,4 @@ jobs:
       run: Install-Module Pester -Force
     - name: Install Pester
       shell: pwsh
-      run: Invoke-Pester test
+      run: Invoke-Pester test -EnableExit
