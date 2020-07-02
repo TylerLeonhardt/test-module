@@ -11,6 +11,9 @@ jobs:
 
     steps:
     - uses: devblackops/github-action-psscriptanalyzer@master
+    - uses: TylerLeonhardt/container-action-github-ops@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     name: do the thing.
@@ -22,9 +25,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: TylerLeonhardt/container-action-github-ops@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install Pester
       shell: pwsh
       run: Install-Module Pester -Force -MaximumVersion 4.999.999
