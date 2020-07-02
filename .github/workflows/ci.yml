@@ -27,7 +27,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install Pester
       shell: pwsh
-      run: Install-Module Pester -Force
+      run: Install-Module Pester -Force -MaximumVersion 4.999.999
     - name: Invoke Pester
       shell: pwsh
       run: Invoke-Pester test -EnableExit
