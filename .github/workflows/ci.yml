@@ -1,6 +1,8 @@
 name: CI
 
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
   lint:
@@ -20,10 +22,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - uses: TylerLeonhardt/container-action-pwsh@master
     - name: Install Pester
       shell: pwsh
       run: Install-Module Pester -Force
-    - name: Install Pester
+    - name: Invoke Pester
       shell: pwsh
       run: Invoke-Pester test -EnableExit
     - uses: actions/upload-artifact@master
