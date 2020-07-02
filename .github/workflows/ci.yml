@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: TylerLeonhardt/container-action-pwsh@master
+    - uses: TylerLeonhardt/container-action-github-ops@master
     - name: Install Pester
       shell: pwsh
       run: Install-Module Pester -Force
