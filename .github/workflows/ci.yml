@@ -2,7 +2,6 @@ name: CI
 
 on:
   push:
-  pull_request:
 
 jobs:
   lint:
@@ -27,7 +26,10 @@ jobs:
       run: Install-Module Pester -Force -MaximumVersion 4.999.999
     - name: Invoke Pester
       shell: pwsh
-      run: Invoke-Pester test -EnableExit
+      run: |
+        Import-Module ./Codespaces.psm1
+        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
+        Invoke-Pester test -EnableExit
     - uses: actions/upload-artifact@master
       with:
         name: test-module
