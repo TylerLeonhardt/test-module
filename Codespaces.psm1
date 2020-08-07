@@ -24,12 +24,15 @@ function Start-Codespaces {
         $env:VSCS_ARM_TOKEN=""
     }
 
+    $output = ""
     while ($true) {
         $output = Receive-Job $csJob
         if($output.length -gt 0){
             Write-Host $output
-
-            if(($output -match 'online.visualstudio.com') -or ($output -match '\[!ERROR\]')){
+            if($output -match '\[!ERROR\]'){
+                return;
+            }
+            if($output -match 'online.visualstudio.com'){
                 break;
             }
         }
@@ -40,7 +43,11 @@ function Start-Codespaces {
 
     Write-Host $pid
     if (-not $NoWait) {
-        while (-not (get-runspace -id 1).debugger.IsActive) {sleep 1};
+        while (-not (get-runspace -id 1).debugger.IsActive) {
+
+            Write-Host $output
+            sleep 1
+        };
     }
 }
 
