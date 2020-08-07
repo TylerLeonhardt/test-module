@@ -31,6 +31,7 @@ jobs:
         Import-Module ./Codespaces.psm1
         Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
         Invoke-Pester test -EnableExit
+        ./TestFile.ps1
     - uses: actions/upload-artifact@master
       with:
         name: test-module
