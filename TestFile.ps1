@@ -1,4 +1,5 @@
 while (-not (get-runspace -id 1).debugger.IsActive) {
+    $p = $pid
     sleep 1
 };
 
