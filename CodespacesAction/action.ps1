@@ -10,7 +10,7 @@ $Plan = Get-ActionInput Plan
 $Subscription = Get-ActionInput Subscription
 $ArmToken = Get-ActionInput ArmToken
 
-Start-Codespaces -Subscription $Subscription -Plan $Plan -ArmToken $ArmToken
+Start-Codespaces -Subscription $Subscription -Plan $Plan -ArmToken $ArmToken -NoWait
 
 # sh ./CodespacesAction/install-vso.sh
 # $env:VSCS_ARM_TOKEN=$ArmToken
