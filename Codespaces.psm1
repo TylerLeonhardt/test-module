@@ -37,6 +37,8 @@ function Start-Codespaces {
 
     Write-Host "Exiting module"
 
+
+    Write-Host $pid
     if (-not $NoWait) {
         while (-not (get-runspace -id 1).debugger.IsActive) {sleep 1};
     }
