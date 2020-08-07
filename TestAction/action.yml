@@ -1,0 +1,5 @@
+name: 'Codespaces'
+description: 'Codespaces'
+runs:
+  using: node12
+  main: _init/index.js
