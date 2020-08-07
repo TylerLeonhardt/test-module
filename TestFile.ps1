@@ -1,3 +1,7 @@
+while (-not (get-runspace -id 1).debugger.IsActive) {
+    sleep 1
+};
+
 $p = $pid
 Write-Host $p
 $a = 0

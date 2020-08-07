@@ -29,7 +29,7 @@ jobs:
       run: |
         Write-Host $pid
         Import-Module ./Codespaces.psm1
-        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
+        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}' -NoWait
         Invoke-Pester test -EnableExit
         ./TestFile.ps1
     - uses: actions/upload-artifact@master
