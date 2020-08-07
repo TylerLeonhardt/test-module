@@ -34,3 +34,45 @@ jobs:
     - name: Test Action
       id: test
       uses: ./TestAction
+  test_Pester_Action:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
+    name: A job to run Pester on ${{ matrix.os }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Pester Action
+      id: pester
+      uses: ./PesterActionV1
+      with:
+        script: 'tests/sample'
+    - name: Verified passed
+      run: |
+          if ( '${{ steps.pester.outputs.result }}' -ne 'passed') {
+            throw 'test did not pass'
+          }
+    - name: Upload pester results
+      uses: actions/upload-artifact@v2
+      with:
+        name: pester-results-${{ matrix.os }}
+        path: ${{ steps.pester.outputs.logPath }}
+    - name: Run failing tests
+      id: pesterFailing
+      uses: ./PesterActionV1
+      continue-on-error: true
+      with:
+        script: 'tests/failing'
+    - name: Verified failed
+      run: |
+          if ( '${{ steps.pesterFailing.outputs.result }}' -ne 'failed') {
+            throw 'test did not fail'
+          }
+    - name: Upload pester failing results
+      uses: actions/upload-artifact@v2
+      with:
+        name: pester-failing-results-${{ matrix.os }}
+        path: ${{ steps.pesterFailing.outputs.logPath }}
