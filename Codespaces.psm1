@@ -5,14 +5,50 @@ function Start-Codespaces {
         [Parameter(Position=1, Mandatory)]
         [string]$Plan,
         [Parameter(Position=2, Mandatory)]
-        [string]$ArmToken
+        [string]$ArmToken,
+        [switch]$NoWait
+
     )
+
     Install-Codespaces
+
+    Write-Host "Setting arm token"
     $env:VSCS_ARM_TOKEN=$ArmToken
 
-    "n`n1`n`n" | ./bin/codespaces start -s $Subscription -p $Plan
+    Write-Host "Starting codespaces"
 
-    Write-Output "Done"
+    $csJob = Start-Job -ScriptBlock {
+        $subscription = $using:Subscription
+        $plan = $using:Plan
+        "n`n1`n`n" | ./bin/codespaces start -s $subscription -p $plan
+        $env:VSCS_ARM_TOKEN=""
+    }
+
+    $output = ""
+    while ($true) {
+        $output = Receive-Job $csJob
+        if($output.length -gt 0){
+            Write-Host $output
+            if($output -match '\[!ERROR\]'){
+                return;
+            }
+            if($output -match 'online.visualstudio.com'){
+                break;
+            }
+        }
+    }
+
+    Write-Host "Exiting module"
+
+
+    Write-Host $pid
+    if (-not $NoWait) {
+        while (-not (get-runspace -id 1).debugger.IsActive) {
+
+            Write-Host $output
+            sleep 3
+        };
+    }
 }
 
 function Install-Codespaces{
