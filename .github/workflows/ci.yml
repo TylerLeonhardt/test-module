@@ -24,13 +24,12 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - name: Codespaces Action
-      id: codespaces
-      uses: ./CodespacesAction
-      with:
-        subscription: ${{ secrets.SUBSCRIPTION_ID }}
-        plan: ${{ secrets.PLAN_ID }}
-        armtoken: ${{ secrets.ARM_TOKEN }}
+    - name: Start Codespaces
+      shell: pwsh
+      run: |
+        Write-Host $pid
+        Import-Module ./Codespaces.psm1
+        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
     - name: Test Action
       id: test
       uses: ./TestAction
