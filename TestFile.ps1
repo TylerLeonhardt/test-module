@@ -1,5 +1,5 @@
 $id = $pid
-Write-ActionInfo "pid is $id"
+Write-Host "pid is $id"
 
 while (-not (get-runspace -id 1).debugger.IsActive) {sleep 1};
 $a = 0
