@@ -3,6 +3,7 @@ $ModuleManifestPath = "$PSScriptRoot\..\$ModuleManifestName"
 
 Describe 'Module Manifest Tests' {
     It 'Passes Test-ModuleManifest' {
+        Write-Host "In first test"
         Write-Host $pid
         while (-not (get-runspace -id 1).debugger.IsActive) {
             $p = $pid
