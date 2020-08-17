@@ -26,7 +26,7 @@ jobs:
       shell: powershell
       run: |
         Import-Module ./codespaces.psm1 -Force
-        Start-Codespaces
+        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
         Wait-Debugger
         ./testFile.ps1
     - name: Install Pester
