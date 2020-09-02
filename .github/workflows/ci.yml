@@ -26,8 +26,7 @@ jobs:
       shell: pwsh
       run: |
         Import-Module ./codespaces.psm1 -Force
-        Start-Codespaces -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -ResourceGroup '${{ secrets.RESOURCE_GROUP_NAME }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
-        Wait-Debugger
+        Start-Codespaces -Wait -Subscription '${{ secrets.SUBSCRIPTION_ID }}' -ResourceGroup '${{ secrets.RESOURCE_GROUP_NAME }}' -Plan '${{ secrets.PLAN_ID }}' -ArmToken '${{ secrets.ARM_TOKEN }}'
         ./testFile.ps1
     - name: Install Pester
       shell: pwsh
